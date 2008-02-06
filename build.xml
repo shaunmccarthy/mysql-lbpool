@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project name="lbpool" default="jar" basedir=".">
+
+    <property environment="env"/>
+
+    <property name="project" value="lbpool"/>
+    <property name="version" value="1.1.0"/>
+
+    <path id="project.classpath">
+
+        <pathelement location="compile"/>
+
+        <fileset dir="lib">
+
+             <include name="*.jar"/>
+
+        </fileset>
+
+    </path>
+
+    <target name="compile">
+
+        <mkdir dir="target/classes"/>
+
+        <javac classpathref="project.classpath"
+               nowarn="on"
+               source="1.4"
+               target="1.4"
+               srcdir="src/java"
+               destdir="target/classes"
+               debug="true">
+            <include name="**/*.java"/>
+        </javac>
+
+    </target>
+    
+    <target name="clean">
+        <delete dir="target"/>
+    </target>
+
+    <target name="jar" depends="compile">
+
+        <jar compress="yes" jarfile="target/lbpool-${version}.jar">
+
+            <fileset dir="target/classes">
+
+                <include name="com/**"/>
+
+            </fileset>
+
+        </jar>
+
+    </target>
+
+    <target name="dist" depends="jar">
+
+        <mkdir dir="target/${project}-${version}" />
+
+        <copy todir="target/${project}-${version}">
+            <fileset dir=".">
+                <include name="lib/*.jar"/>
+                <include name="src/**"/>
+                <include name="build.xml"/>
+                <include name="target/${project}-${version}.jar"/>
+            </fileset>
+        </copy>
+
+        <tar destfile="target/${project}-${version}.tar">
+
+            <tarfileset dir="target">
+                <include name="${project}-${version}/**"/>
+            </tarfileset>
+
+        </tar>
+
+        <gzip src="target/${project}-${version}.tar" destfile="target/${project}-${version}.tar.gz"/>
+        <delete file="target/${project}-${version}.tar"/>
+
+    </target>
+
+</project>
