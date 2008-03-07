@@ -204,6 +204,14 @@ public class LBPreparedStatement implements PreparedStatement {
     public void setNull (int paramIndex, int sqlType, String typeName) 
         throws SQLException {  _stmt.setNull(paramIndex,sqlType,typeName);}
 
+    public void setNClob(int v,java.io.Reader r) throws SQLException {
+        throw new SQLException( "not implemented" );
+    }
+    
+    public boolean isPoolable() throws SQLException {
+        return true;
+    }
+    
     public boolean getMoreResults(int current) throws SQLException {
         
         return _stmt.getMoreResults(current);
