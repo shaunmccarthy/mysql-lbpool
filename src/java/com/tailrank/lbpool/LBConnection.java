@@ -421,6 +421,14 @@ public class LBConnection implements Connection {
         
     }
 
+    public Array createArrayOf(String typeName,
+                        Object[] elements)
+        throws SQLException {
+
+        throw new SQLException( "not implemented" );
+
+    }
+    
     public Statement createStatement(int resultSetType,
                                      int resultSetConcurrency,
                                      int resultSetHoldability)
