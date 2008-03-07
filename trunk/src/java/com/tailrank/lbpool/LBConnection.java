@@ -413,6 +413,10 @@ public class LBConnection implements Connection {
 
     // **** Wrapped SQL execution ***********************************************
 
+    public Properties getClientInfo() throws SQLException {
+        throw new SQLException( "not implemented" );
+    }
+    
     public Struct createStruct(String typeName,
                                Object[] attributes) 
         throws SQLException {

@@ -208,6 +208,9 @@ public class LBPreparedStatement implements PreparedStatement {
         throw new SQLException( "not implemented" );
     }
 
+    public void setClob(int v,java.io.Reader r) throws SQLException {
+        throw new SQLException( "not implemented" );
+    }
 
     public void setBlob(int v,java.io.InputStream is) throws SQLException {
         throw new SQLException( "not implemented" );
