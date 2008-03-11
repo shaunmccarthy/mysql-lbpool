@@ -416,7 +416,11 @@ public class LBConnection implements Connection {
     public Properties getClientInfo() throws SQLException {
         throw new SQLException( "not implemented" );
     }
-    
+
+    public Properties getClientInfo( String v ) throws SQLException {
+        throw new SQLException( "not implemented" );
+    }
+
     public Struct createStruct(String typeName,
                                Object[] attributes) 
         throws SQLException {
