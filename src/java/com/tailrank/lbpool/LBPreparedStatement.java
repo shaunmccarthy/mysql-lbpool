@@ -214,9 +214,12 @@ public class LBPreparedStatement implements PreparedStatement {
 
     public void setBlob(int v,java.io.InputStream is) throws SQLException {
         throw new SQLException( "not implemented" );
-        //_stmt.setBlob( v, is );
     }
 
+    public void setNCharacterStream(int v,java.io.Reader r) throws SQLException {
+        throw new SQLException( "not implemented" );
+    }
+    
     public boolean isPoolable() throws SQLException {
         return true;
     }
