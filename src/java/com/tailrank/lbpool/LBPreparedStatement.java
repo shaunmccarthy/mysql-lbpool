@@ -216,7 +216,52 @@ public class LBPreparedStatement implements PreparedStatement {
         throw new SQLException( "not implemented" );
     }
 
+    public void setBlob(int v,java.io.InputStream is, int v2 ) throws SQLException {
+        throw new SQLException( "not implemented" );
+    }
+
+    public void setBlob(int v,java.io.InputStream is, long v2 ) throws SQLException {
+        throw new SQLException( "not implemented" );
+    }
+
+    public void setClob(int v,java.io.InputStream is, long v2 ) throws SQLException {
+        throw new SQLException( "not implemented" );
+    }
+
     public void setNCharacterStream(int v,java.io.Reader r) throws SQLException {
+        throw new SQLException( "not implemented" );
+    }
+
+    public void setCharacterStream(int v,java.io.Reader r) throws SQLException {
+        throw new SQLException( "not implemented" );
+    }
+
+    public void setCharacterStream(int v,java.io.Reader r, long v2 ) throws SQLException {
+        throw new SQLException( "not implemented" );
+    }
+
+    public void setBinaryStream(int v,java.io.InputStream is) throws SQLException {
+        throw new SQLException( "not implemented" );
+    }
+
+    public void setBinaryStream(int v,java.io.InputStream is, long v2) throws SQLException {
+        throw new SQLException( "not implemented" );
+    }
+
+    public void setAsciiStream(int parameterIndex, InputStream x) {
+        throw new SQLException( "not implemented" );
+    }
+
+    public void setAsciiStream(int v,java.io.InputStream is, long v2 ) throws SQLException {
+        throw new SQLException( "not implemented" );
+    }
+
+    public void setSQLXML(int parameterIndex,
+                          SQLXML xmlObject) throws SQLException {
+        throw new SQLException( "not implemented" );
+    }
+
+    public void setNClob(int parameterIndex, Reader reader, long v2 ) throws SQLException {
         throw new SQLException( "not implemented" );
     }
     

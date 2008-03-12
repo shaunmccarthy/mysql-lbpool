@@ -417,10 +417,46 @@ public class LBConnection implements Connection {
         throw new SQLException( "not implemented" );
     }
 
-    public Properties getClientInfo( String v ) throws SQLException {
+    public String getClientInfo( String v ) throws SQLException {
         throw new SQLException( "not implemented" );
     }
 
+    public void setClientInfo( Properties p ) {
+        throw new RuntimeException( "not implemented" );
+    }
+
+    public void setClientInfo( String key, String value ) {
+        throw new RuntimeException( "not implemented" );
+    }
+
+    public boolean isValid( int v ) {
+        throw new RuntimeException( "not implemented" );
+    }
+
+    public SQLXML createSQLXML() throws SQLException {
+        throw new RuntimeException( "not implemented" );
+    }
+
+    public NClob createNClob() throws SQLException {
+        throw new RuntimeException( "not implemented" );
+    }
+
+    public Blob createBlob() throws SQLException {
+        throw new RuntimeException( "not implemented" );
+    }
+
+    public Clob createClob() throws SQLException {
+        throw new RuntimeException( "not implemented" );
+    }
+
+    public boolean isWrapperFor(Class<?> iface) throws SQLException {
+        throw new RuntimeException( "not implemented" );
+    }
+    
+    public <T> T unwrap(Class<T> iface) throws SQLException {
+        throw new RuntimeException( "not implemented" );
+    }
+    
     public Struct createStruct(String typeName,
                                Object[] attributes) 
         throws SQLException {

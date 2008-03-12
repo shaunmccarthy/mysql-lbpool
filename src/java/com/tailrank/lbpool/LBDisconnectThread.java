@@ -21,7 +21,7 @@ public class LBDisconnectThread extends Thread {
 
     public static long SPIN_INTERVAL = 1000L;
 
-    public static long MAX_SPIN_INTERVAL = 60L * SPIN_INTERVAL;
+    public static long MAX_SPIN_INTERVAL = 5L * SPIN_INTERVAL;
 
     public Connection delegate = null;
     
