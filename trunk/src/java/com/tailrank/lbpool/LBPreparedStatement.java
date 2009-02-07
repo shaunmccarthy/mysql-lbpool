@@ -249,18 +249,20 @@ public class LBPreparedStatement implements PreparedStatement {
     }
 
     public void setAsciiStream(int parameterIndex, InputStream x) {
-        throw new SQLException( "not implemented" );
+        throw new RuntimeException( "not implemented" );
     }
 
     public void setAsciiStream(int v,java.io.InputStream is, long v2 ) throws SQLException {
         throw new SQLException( "not implemented" );
     }
 
+    /*
     public void setSQLXML(int parameterIndex,
                           SQLXML xmlObject) throws SQLException {
         throw new SQLException( "not implemented" );
     }
-
+    */
+    
     public void setNClob(int parameterIndex, Reader reader, long v2 ) throws SQLException {
         throw new SQLException( "not implemented" );
     }

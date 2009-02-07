@@ -80,7 +80,7 @@ public class LBDisconnectThread extends Thread {
 
                 Thread.sleep( SPIN_INTERVAL );
 
-            } catch ( Throwable t ) {
+            } catch ( Exception t ) {
                 log.debug( "Exception in LBDisconnectThread: ", t );
                 return; //I don't think we should go forward here.
             }

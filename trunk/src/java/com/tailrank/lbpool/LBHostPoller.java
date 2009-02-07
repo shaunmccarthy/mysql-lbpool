@@ -27,7 +27,7 @@ public class LBHostPoller extends Thread {
     public LBHostPoller( LBConnectionProfile profile,
                          LBDriver driver ) {
 
-        super( "lbconn host poller" );
+        super( "lbconn-host-poller" );
         
         this.profile = profile;
         this.driver = driver;
@@ -46,7 +46,7 @@ public class LBHostPoller extends Thread {
 
                 doPoll();
                 
-            } catch ( Throwable t ) {
+            } catch ( Exception t ) {
                 log.debug( "Exception in LBHostPoller: ", t );
             }
 
@@ -263,10 +263,19 @@ public class LBHostPoller extends Thread {
             if ( profile.hostRegistry.size() == 2 &&
                  current_master != null ) {
 
-                //FIXME: if the slave is physically down we should JUST use the master...
+                //FIXME: if the slave is physically marked offline we should
+                //JUST use the master I think.
+
+                // smarter handling of automatic throttling.  For now we can
+                // allow the slave to fall behind for a while before we detect
+                // that it will NEVER catch up.  Usually the slave starts to
+                // catch up without needing to pause the entire cluster.
+                if ( slave_status.milliseconds_behind_master > LBDriver.MAX_MASTER_THROTTLE_INTERVAL ) {
                 
-                current_master.setOffline( offline );
-                current_master.setOfflineSlaveOverload( offline );
+                    current_master.setOffline( offline );
+                    current_master.setOfflineSlaveOverload( offline );
+
+                }
 
             }
             
@@ -286,6 +295,10 @@ public class LBHostPoller extends Thread {
                 
             }
 
+            //TODO Mon Jan 26 2009 05:34 PM (burton@tailrank.com): add a new
+            //field for offline_exception so that we can store and log and
+            //exception that happends when we communicate with this host.
+            
             status.setOffline( true );
             status.offline_message = e.getMessage();
             
@@ -406,13 +419,20 @@ public class LBHostPoller extends Thread {
         try {
 
             stmt = conn.createStatement();
-            results = stmt.executeQuery( " SHOW SLAVE STATUS /* lbpool */ " );
+            results = stmt.executeQuery( "SHOW SLAVE STATUS /* lbpool */ " );
 
             slave_status.offline_state = getOfflineState( results, status );
 
-            if ( slave_status.offline_state != SLAVE_IS_MASTER )
-                slave_status.master_host = results.getString( "Master_Host" );
-            
+            if ( results.first() ) {
+                
+                if ( slave_status.offline_state != SLAVE_IS_MASTER )
+                    slave_status.master_host = results.getString( "Master_Host" );
+                
+                int seconds_behind_master = results.getInt( "Seconds_Behind_Master" );
+                slave_status.milliseconds_behind_master = seconds_behind_master * 1000;
+
+            }
+
             return slave_status;
             
         } finally {
@@ -480,6 +500,7 @@ public class LBHostPoller extends Thread {
 
         int offline_state = -1024;
         String master_host = null;
+        long milliseconds_behind_master = 0;
         
     }
 }
