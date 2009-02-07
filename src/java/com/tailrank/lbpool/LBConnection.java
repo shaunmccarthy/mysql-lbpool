@@ -433,13 +433,17 @@ public class LBConnection implements Connection {
         throw new RuntimeException( "not implemented" );
     }
 
+    /*
     public SQLXML createSQLXML() throws SQLException {
         throw new RuntimeException( "not implemented" );
     }
+    */
 
+    /*
     public NClob createNClob() throws SQLException {
         throw new RuntimeException( "not implemented" );
     }
+    */
 
     public Blob createBlob() throws SQLException {
         throw new RuntimeException( "not implemented" );

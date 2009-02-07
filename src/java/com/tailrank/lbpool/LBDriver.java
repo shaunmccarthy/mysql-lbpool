@@ -333,6 +333,14 @@ public class LBDriver implements Driver {
     public static long MAX_SLAVE_BEHIND_INTERVAL = 30L * 1000L;
 
     /**
+     * When the slave has fallen behind for N minutes, we should throttle the
+     * entire lbpool configuration (I think) because the slave will probably
+     * never catch up.
+     *
+     */
+    public static long MAX_MASTER_THROTTLE_INTERVAL = 30L * 60L * 1000L;
+    
+    /**
      * If the load of a specific host is too high... we should stop using it for
      * a while to allow it to catch up.  This should improve overall cluster
      * performance, throughput, and prevent replication from falling behind.
@@ -783,7 +791,14 @@ public class LBDriver implements Driver {
         com.mysql.jdbc.NonRegisteringDriver driver = 
             new com.mysql.jdbc.NonRegisteringDriver();
 
-        return driver.connect( url, info );
+        try {
+
+            return driver.connect( url, info );
+
+        } catch ( SQLException e ) {
+            throw new SQLException( String.format( "Unable to connect to %s: %s",
+                                                   url, e.getMessage() ) );
+        }
 
     }
 
