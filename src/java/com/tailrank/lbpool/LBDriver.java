@@ -672,7 +672,20 @@ public class LBDriver implements Driver {
         return getConnectionStatus( profile );
         
     }
-    
+
+    public static void dumpConnectionStatus() throws SQLException {
+
+        System.out.printf( "------------\n" );
+        System.out.printf( "Connection status:\n" );
+
+        for( Object key : PROFILE_REGISTRY.keySet() ) {
+            System.out.printf( "%s\n", key.toString() );
+            System.out.printf( "---\n" );
+            System.out.printf( "%s\n", getConnectionStatus( key.toString() ) );
+        }
+        
+    }
+
     /**
      * Get status information for all connections.
      */
